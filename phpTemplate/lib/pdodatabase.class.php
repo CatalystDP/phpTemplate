@@ -8,7 +8,7 @@ class pdodatabase{
     static private $instace;
     //protected  $isExec;//bool类型用于标识是否插入/删除
     static public function dateBase($type,$host,$user,$pwd,$db){
-        if(!self::$instace)
+        if(self::$instace)
             return self::$instace;
         self::$instace=new pdodatabase($type,$host,$user,$pwd,$db);
         return self::$instace;
