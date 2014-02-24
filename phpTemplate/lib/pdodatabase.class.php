@@ -25,7 +25,8 @@ class pdodatabase{
 
     public function execSql_with_result($sql){
         $this->result=$this->pdo->query($sql);
-        $this->result->setFetchMode(PDO::FETCH_ASSOC);
+        if($this->result)
+            $this->result->setFetchMode(PDO::FETCH_ASSOC);
     }
     public function execSql_without_result($sql){
         return $this->pdo->exec($sql);
@@ -34,10 +35,10 @@ class pdodatabase{
         return $this->pdo->lastInsertId();
     }
     public function fetchSingleResult(){
-        return $this->result->fetch();
+        return ($this->result)? $this->result->fetch():false;
     }
     public function fetchMultiResult(){
-        return $this->result->fetchAll();
+        return ($this->result)? $this->result->fetchAll():false;
     }
     public function closeDatabase(){
         $this->pdo=null;
