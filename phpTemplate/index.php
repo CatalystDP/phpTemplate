@@ -3,8 +3,12 @@ include_once "config/path.config.php";
 include_once "config/dirparse.config.php";
 header(UTF8_HEADER);
 $req = $_REQUEST;
-if(isset($req["PHPSESSID"]))
-    unset($req["PHPSESSID"]);
+if(!empty($_COOKIE))
+    foreach($_COOKIE as $key=>$value)
+    {
+        unset($req[$key]);
+    }
+
 $controller = $path["controller"] . "/" . (Dirparse::returnDir($req["c"])) . ".php";
 $class = $req["cl"];
 $func = $req["f"];
